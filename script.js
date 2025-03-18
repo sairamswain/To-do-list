@@ -1,40 +1,72 @@
-const inputBox = document.getElementById("input-box");
-const listcontainer = document.getElementById("list-container");
+const taskList = [];
+const calendar = document.getElementById("calendar");
 
-function AddTask(){
-    if(inputBox.value === ''){
-        alert("You must write something!");
+function addTask() {
+    const taskInput = document.getElementById("task-input").value;
+    const dateInput = document.getElementById("date-input").value;
+    const timeInput = document.getElementById("time-input").value;
 
+    if (!taskInput || !dateInput || !timeInput) {
+        showNotification("Please fill all fields!", "red");
+        return;
     }
-    else{
-        let li = document.createElement("li");
-        li.innerHTML = inputBox.value;
-        listcontainer.appendChild(li);
-        let span = document.createElement("span");
-        span.innerHTML = "\u00d7";
-        li.appendChild(span);
-    }
-    inputBox.value = "";
-    saveData();
+
+    const formattedTime = convertToAMPM(timeInput);
+    taskList.push({ task: taskInput, date: dateInput, time: formattedTime });
+
+    renderTasks();
+    renderCalendar();
+    showNotification("Task added successfully!", "green");
 }
 
-listcontainer.addEventListener("click", function(e){
-    if(e.target.tagName === "LI"){
-        e.target.classList.toggle("checked");
-        saveData();
-    }
-    else if(e.target.tagName === "SPAN"){
-        e.target.parentElement.remove();
-        saveData();
-    
-    }
-}, false);
-
-function saveData(){
-    localStorage.setItem("data", listContainer.innerHTML);
-
-    }
-function showTask(){
-    listCoinnerHTML = localStorage.getItem("data");
+function convertToAMPM(time) {
+    const [hours, minutes] = time.split(":");
+    const hour = parseInt(hours);
+    const suffix = hour >= 12 ? "PM" : "AM";
+    const formattedHour = hour % 12 || 12;
+    return `${formattedHour}:${minutes} ${suffix}`;
 }
-showTask();
+
+function renderTasks() {
+    const taskContainer = document.getElementById("task-list");
+    taskContainer.innerHTML = '';
+
+    taskList.forEach((task, index) => {
+        const li = document.createElement("li");
+        li.textContent = `${task.task} - ${task.date} at ${task.time}`;
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+        deleteBtn.onclick = () => {
+            taskList.splice(index, 1);
+            renderTasks();
+            renderCalendar();
+        };
+
+        li.appendChild(deleteBtn);
+        taskContainer.appendChild(li);
+    });
+}
+
+function renderCalendar() {
+    calendar.innerHTML = '';
+    for (let i = 1; i <= 30; i++) {
+        const day = document.createElement("div");
+        day.classList.add("day");
+        day.textContent = i;
+        calendar.appendChild(day);
+    }
+}
+
+function showNotification(message, color) {
+    const notification = document.getElementById("notification");
+    notification.textContent = message;
+    notification.style.background = color;
+    notification.classList.add("show");
+
+    setTimeout(() => {
+        notification.classList.remove("show");
+    }, 3000);
+}
+
+renderCalendar();
