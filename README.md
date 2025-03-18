@@ -1,12 +1,32 @@
-# To-do-list
+🚀 To-Do List App with Calendar, Time Tracking, AM/PM, and Notifications
+🛠️ Description
+This is a fully functional To-Do List App built using HTML, CSS, and JavaScript. The app allows users to:
 
-A simple and interactive To-Do List web application built with HTML, CSS, and JavaScript. This app allows users to add, edit, and delete tasks, and mark them as complete. It's designed to be a lightweight and user-friendly tool for managing daily tasks.
+✅ Add, view, and delete tasks with associated dates and times.
+📅 Mark dates on the calendar where tasks are scheduled.
+🕰️ Display task time in AM/PM format.
+🔔 Receive notifications when tasks are added or deleted.
+💫 Enjoy a clean, modern UI with smooth animations and responsive design.
+🔥 Features
+Task Management
 
-Add New Tasks: Easily add new tasks with a user-friendly input field.
-Delete Tasks: Remove tasks that are no longer required.
-Mark as Complete: Toggle the completion status of tasks.
-Responsive Design: Works well on both desktop and mobile devices.
+Add tasks with a title, date, and time.
+View all tasks in a list.
+Delete tasks individually.
+Calendar Integration
 
-HTML: Structure of the web application.
-CSS: Styling and layout.
-JavaScript: Interactivity and functionality.
+Mark task dates on the calendar.
+Highlight upcoming and past tasks.
+Time Formatting
+
+Display time in 12-hour AM/PM format.
+Real-Time Notifications
+
+Get notifications when you add or delete tasks.
+Responsive Design
+
+Optimized for both desktop and mobile devices.
+💻 Technologies Used
+HTML5 → Structure and content.
+CSS3 → Styling and animations.
+JavaScript → Logic, task management, and notifications.
